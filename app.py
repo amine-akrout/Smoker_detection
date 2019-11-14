@@ -1,12 +1,7 @@
-from flask import Flask, render_template, url_for, request
-import json
-from imageio import imread
+from flask import Flask, render_template, request
 from fastai.vision import *
-import urllib.request
-from PIL import Image
 
 app = Flask(__name__)
-
 
 @app.route('/')
 def entry_page():
@@ -17,16 +12,12 @@ def entry_page():
 @app.route('/predict_object/', methods=['GET', 'POST'])
 def render_message():
     # Loading CNN model
-    # saved_model = 'saved_models/tuned_model_fin.h5'
-    # saved_model = 'saved_models/tuned_model_fin.h5'
     path = Path('data')
     classes = ['non_smoker', 'smoker']
     data2 = ImageDataBunch.single_from_classes(path, classes, ds_tfms=get_transforms(), size=224).normalize(imagenet_stats)
 
-
-    # model = load_model(saved_model)
     learn = create_cnn(data2, models.alexnet)
-    learn.load('alexnet')
+    learn.load('../models/alexnet')
 
     try:
         # Get image URL as input
@@ -36,22 +27,20 @@ def render_message():
             handler.write(img_data)
         img = open_image('img.jpg')
 
-        '''
-        #Call classify function to predict the image class using the loaded CNN model
-        final,pred_class = classify(x, model)
-        print(pred_class)
-        print(final)
-        '''
-
         pred_class, pred_idx, final = learn.predict(img)
 
         print(pred_class)
         print(final)
 
         # Store model prediction results to pass to the web page
-        message = "Model prediction: {}".format(pred_class)
+    
+        if str(pred_class) == "smoker":
+            message = "Model prediction: Smoker ! "
+        else:
+            message = "Model prediction: Non Smoker ! "
+        
         print('Python module executed successfully')
-
+        
     except Exception as e:
         # Store error to pass to the web page
         message = "Error encountered. Try another image. ErrorClass: {}, Argument: {} and Traceback details are: {}".format(
@@ -66,7 +55,4 @@ def render_message():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
-
-#{{ data.reset_index(drop = True).to_html(classes="table table-striped") | safe}}
+    app.run(debug=True,host='0.0.0.0')
