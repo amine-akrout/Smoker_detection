@@ -39,8 +39,10 @@ def render_message():
         else:
             message = "Model prediction: Non Smoker ! "
         
+        #message = "Model prediction: {}".format(pred_class)
         print('Python module executed successfully')
-        
+        print (str(pred_class))
+
     except Exception as e:
         # Store error to pass to the web page
         message = "Error encountered. Try another image. ErrorClass: {}, Argument: {} and Traceback details are: {}".format(
