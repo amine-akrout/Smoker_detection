@@ -2,3 +2,4 @@
 data/
 data_tf/
 .ipynb_checkpoints/
+smoker_detection/variables/*
