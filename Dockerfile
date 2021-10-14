@@ -1,11 +1,6 @@
-FROM spellrun/fastai
-
-WORKDIR /usr/src/app
-COPY . .
-
-RUN python3 -m pip install -r requirements.txt
-
+FROM continuumio/anaconda3
+COPY . /usr/app/
 EXPOSE 5000
-
-ENTRYPOINT ["python3"]
-CMD ["app.py"]
+WORKDIR /usr/app/
+RUN pip install -r requirements.txt
+CMD python app.py
