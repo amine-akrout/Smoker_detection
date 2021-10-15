@@ -1,0 +1,27 @@
+version: '3.2'
+services:
+  web_app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    container_name: web_app
+    networks:
+      - app
+  tf_serving:
+    ports:
+      - '8501:8501'
+    container_name: smoker_detection
+    environment:
+      - MODEL_NAME=smoker_detector
+    image: tensorflow/serving
+    volumes:
+      - type: bind
+        source: .\smoker_detection\
+        target: /models/smoker_detector/1
+    networks:
+      - app
+networks:
+  app:
+    driver: bridge
