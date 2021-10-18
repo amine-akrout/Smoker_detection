@@ -18,7 +18,7 @@ services:
     image: tensorflow/serving
     volumes:
       - type: bind
-        source: .\smoker_detection\
+        source: ./smoker_detection/
         target: /models/smoker_detector/1
     networks:
       - app
