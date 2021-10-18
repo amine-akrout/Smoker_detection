@@ -7,10 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: docker login
-      run: |
-        docker-compose build .
     - name: docker build
       run: |
-        docker-compose up
+        docker-compose build .
     - name: docker run
+      run: |
+        docker-compose up
