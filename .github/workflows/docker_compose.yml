@@ -9,7 +9,4 @@ jobs:
     - uses: actions/checkout@v2
     - name: docker build
       run: |
-        docker-compose build .
-    - name: docker run
-      run: |
-        docker-compose up
+        docker build ./app
