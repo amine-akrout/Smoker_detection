@@ -52,7 +52,7 @@ Deploying a Tensorflow InceptionV3 model with Flask for smoker detection in a co
 ` docker-compose up`
 
 ### 3. Open the Web App and try it out !
-The App should be running on ` http://localhost:8080`
+The App should be running on ` http://localhost:5000`
 
 
 ## What the app looks like
