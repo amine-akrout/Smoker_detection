@@ -64,4 +64,6 @@ The App should be running on ` http://localhost:8080`
 #### References:
 - [Convolutional Neural Networks in TensorFlow](https://www.example.com) 
 
-https://github.com/rexsimiloluwah/fastapi-tensorflow-serving-old
+- https://github.com/rexsimiloluwah/fastapi-tensorflow-serving-old
+
+- https://github.com/huyhoang17/tensorflow-serving-docker
